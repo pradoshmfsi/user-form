@@ -60,8 +60,10 @@ function validateForm(action) {
   if (isValid) {
     if (action == 0) {
       addDetails();
+      alert("User added successfully");
     } else {
       editDetails(action);
+      alert("User edited successfully");
     }
     fetchUsers();
     $("#userForm")[0].reset();
@@ -119,9 +121,15 @@ function handleEdit(id) {
 
 function handleDelete(id) {
   let userList = JSON.parse(localStorage.getItem("userList"));
-  userList = userList.filter((user) => user.id != id);
-  localStorage.setItem("userList", JSON.stringify(userList));
-  fetchUsers();
+  let userName = userList.filter((user) => user.id == id)[0].firstName;
+  let userResponse = confirm(
+    `Are you sure you want to delete user '${userName}'?`
+  );
+  if (userResponse) {
+    userList = userList.filter((user) => user.id != id);
+    localStorage.setItem("userList", JSON.stringify(userList));
+    fetchUsers();
+  }
 }
 
 function getUserFromForm(id) {
