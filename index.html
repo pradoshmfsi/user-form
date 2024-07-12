@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form</title>
-    <link rel="stylesheet" href="./styles.css?v=2" />
-    <link rel="stylesheet" href="./table.css?v=1" />
+    <link rel="stylesheet" href="./styles.css?v=3" />
+    <link rel="stylesheet" href="./table.css?v=2" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -14,7 +14,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <script src="./helpers.js"></script>
+    <script src="./helpers.js?v=2"></script>
   </head>
   <body>
     <div class="flex-container">
@@ -143,6 +143,7 @@
                       id="txtPhone"
                       name="phone"
                       custom-validation = "isRequired:true|isPattern:^\d{6,12}$"
+                      error-message = "*Allowed: 6-12 digits"
                     />
                   </div>
                 </div>
@@ -198,9 +199,6 @@
                   <div class="form-heading-text">Data</div>
                   <div class="form-heading-graphic"></div>
                 </div>
-              <!-- <div class="button-add">
-                <input type="button" value="Add" id="btnAddNew"/>
-              </div> -->
             </div>
             
             <div class="user-list-container">
@@ -231,6 +229,18 @@
           </div>
           </div>
     </div>
-    <script src="./index.js?v=1"></script>
+    <div class="modal">
+      <div class="modal-content">
+          <div class="modal-heading">
+            <div class="modal-title">Delete User</div>
+            <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <div class="modal-body"></div>
+          <button id="btnConfirmModal">Delete</button>    
+      </div>
+    </div>
+    <div id="alert" class="alert">
+  </div>
+    <script src="./index.js?v=3"></script>
   </body>
 </html>

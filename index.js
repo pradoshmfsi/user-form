@@ -6,11 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     validateForm(event.target.getAttribute("action"));
   });
 
-  // $("#btnAddNew")[0].addEventListener("click", (event) => {
-  //   event.preventDefault();
-  //   $("#userForm")[0].reset();
-  // });
-
   $("#userForm")[0].addEventListener("reset", () => {
     resetUserForm();
   });
@@ -21,14 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // $("#docResume")[0].addEventListener("change", (event) => {
-  //   elementValidation(event.target);
-  // });
-
   $("#colorPicker")[0].addEventListener("input", (event) => {
     $(".form-heading-graphic").forEach((item) => {
       item.style.backgroundColor = event.target.value;
     });
+  });
+
+  $(".modal-close")[0].addEventListener("click", () => {
+    $(".modal")[0].style.display = "none";
+  });
+
+  $("#btnConfirmModal")[0].addEventListener("click", (event) => {
+    handleDelete(event.target.getAttribute("userId"));
   });
 });
 
@@ -60,10 +59,10 @@ function validateForm(action) {
   if (isValid) {
     if (action == 0) {
       addDetails();
-      alert("User added successfully");
+      customAlert("User added successfully");
     } else {
       editDetails(action);
-      alert("User edited successfully");
+      customAlert("User edited successfully");
     }
     fetchUsers();
     $("#userForm")[0].reset();
@@ -97,7 +96,7 @@ function generateUserRow(user) {
                 <button onClick=handleEdit(${
                   user.id
                 })><i class="fa-solid fa-pen"></i></button>
-                <button onClick=handleDelete(${
+                <button onClick=showConfirmModal(${
                   user.id
                 })><i class="fa-solid fa-trash"></i></button>            
               </div>
@@ -121,15 +120,20 @@ function handleEdit(id) {
 
 function handleDelete(id) {
   let userList = JSON.parse(localStorage.getItem("userList"));
+  userList = userList.filter((user) => user.id != id);
+  localStorage.setItem("userList", JSON.stringify(userList));
+  $(".modal")[0].style.display = "none";
+  fetchUsers();
+}
+
+function showConfirmModal(id) {
+  let userList = JSON.parse(localStorage.getItem("userList"));
   let userName = userList.filter((user) => user.id == id)[0].firstName;
-  let userResponse = confirm(
-    `Are you sure you want to delete user '${userName}'?`
-  );
-  if (userResponse) {
-    userList = userList.filter((user) => user.id != id);
-    localStorage.setItem("userList", JSON.stringify(userList));
-    fetchUsers();
-  }
+  $(".modal")[0].style.display = "flex";
+  $(
+    ".modal-body"
+  )[0].textContent = `Are you sure you want to delete user '${userName}'.`;
+  $("#btnConfirmModal")[0].setAttribute("userId", id);
 }
 
 function getUserFromForm(id) {
@@ -159,4 +163,13 @@ function editDetails(userId) {
   let userObj = getUserFromForm(userId);
   userList = userList.map((user) => (user.id == userObj.id ? userObj : user));
   localStorage.setItem("userList", JSON.stringify(userList));
+}
+
+function customAlert(msg) {
+  let alert = $(".alert")[0];
+  alert.textContent = msg;
+  alert.classList.add("show");
+  setTimeout(function () {
+    alert.classList.remove("show");
+  }, 3000);
 }

@@ -10,32 +10,39 @@ function Validator(element) {
     ? "*"
     : "";
 
+  function setError(msg) {
+    errorMsgEle.textContent = msg;
+    element.style.border = "1px solid red";
+    return false;
+  }
+
+  function resetField() {
+    errorMsgEle.textContent = resetErrorMsg;
+    element.style.border = "1px solid black";
+    return true;
+  }
+
   function isRequired() {
     if (element.value.trim() == "") {
-      errorMsgEle.textContent = "*Required";
-      return false;
+      return setError("*Required");
     }
-    errorMsgEle.textContent = resetErrorMsg;
-    return true;
+    return resetField();
   }
 
   function isPattern(pattern) {
     pattern = new RegExp(pattern, "g");
     if (!pattern.test(element.value)) {
-      errorMsgEle.textContent = "*Not valid";
-      return false;
+      let errorMsg = element.getAttribute("error-message");
+      return setError(errorMsg ?? "*Not valid");
     }
-    errorMsgEle.textContent = resetErrorMsg;
-    return true;
+    return resetField();
   }
 
   function isMaxLength(value) {
     if (element.value.length > parseInt(value)) {
-      errorMsgEle.textContent = `*Max length - ${value} chars.`;
-      return false;
+      return setError("*Max length - ${value} chars.");
     }
-    errorMsgEle.textContent = resetErrorMsg;
-    return true;
+    return resetField();
   }
 
   function validateRadio(value) {
@@ -47,23 +54,6 @@ function Validator(element) {
     errorMsgEle.textContent = "*";
     return true;
   }
-
-  // function validateDoc(fileNameElement){
-  //     const allowedFormats = ["image/jpeg", "image/jpg", "image/png"];
-  //     if (!element.files[0]) {
-  //         $(`#${fileNameElement}`)[0].textContent = "";
-  //         errorMsgEle.textContent=`*Required`;
-  //         return false;
-  //     } else if (!allowedFormats.includes(element.files[0].type)) {
-  //         $(`#${fileNameElement}`)[0].textContent = "";
-  //         errorMsgEle.textContent=`*Invalid file format`;
-  //         return false;
-  //     } else {
-  //         $(`#${fileNameElement}`)[0].textContent = element.files[0].name;
-  //         errorMsgEle.textContent=`*`;
-  //         return true;
-  //     }
-  // }
 
   return {
     isRequired,
