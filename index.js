@@ -9,12 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#btnAddNew")[0].addEventListener("click", (event) => {
     event.preventDefault();
     $("#userForm")[0].reset();
-    $("#btnSubmitForm")[0].setAttribute("action", 0);
-    $("#btnSubmitForm")[0].value = "Submit";
   });
-  // $("#userForm")[0].addEventListener("reset", () => {
-  //   $("#filename")[0].textContent = "";
-  // });
+
+  $("#userForm")[0].addEventListener("reset", () => {
+    resetUserForm();
+  });
 
   $("[custom-validation]").forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
@@ -32,6 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+function resetUserForm() {
+  $(".form-heading-text")[0].innerText = "Register";
+  $("#btnSubmitForm")[0].setAttribute("action", 0);
+  $("#btnSubmitForm")[0].value = "Submit";
+}
 
 function elementValidation(element) {
   const validator = Validator(element);
@@ -107,6 +112,7 @@ function handleEdit(id) {
       element.value = user[element.name];
     }
   });
+  $(".form-heading-text")[0].innerText = "Edit";
   $("#btnSubmitForm")[0].setAttribute("action", id);
   $("#btnSubmitForm")[0].value = "Edit";
 }
