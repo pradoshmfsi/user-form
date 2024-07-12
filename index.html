@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./table.css" />
+    <link rel="stylesheet" href="./styles.css?v=2" />
+    <link rel="stylesheet" href="./table.css?v=1" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -182,9 +182,14 @@
                   ></textarea>
                 </div>
               </div>
-              <div class="button-add">
-                <input type="submit" value="Submit" id="btnSubmitForm" action="0"/>
-              </div>
+              <div class="button-container">
+                <div class="button-add">
+                  <input type="submit" value="Submit" id="btnSubmitForm" action="0"/>
+                </div>
+                <div class="button-add">
+                  <input type="reset" value="Cancel" id="btnResetForm"/>
+                </div>
+              </div>             
             </div>
           </form>
           <div class="table-container">
@@ -193,9 +198,9 @@
                   <div class="form-heading-text">Data</div>
                   <div class="form-heading-graphic"></div>
                 </div>
-              <div class="button-add">
+              <!-- <div class="button-add">
                 <input type="button" value="Add" id="btnAddNew"/>
-              </div>
+              </div> -->
             </div>
             
             <div class="user-list-container">
@@ -226,6 +231,6 @@
           </div>
           </div>
     </div>
-    <script src="./index.js?v=2"></script>
+    <script src="./index.js?v=1"></script>
   </body>
 </html>

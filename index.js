@@ -6,10 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
     validateForm(event.target.getAttribute("action"));
   });
 
-  $("#btnAddNew")[0].addEventListener("click", (event) => {
-    event.preventDefault();
-    $("#userForm")[0].reset();
-  });
+  // $("#btnAddNew")[0].addEventListener("click", (event) => {
+  //   event.preventDefault();
+  //   $("#userForm")[0].reset();
+  // });
 
   $("#userForm")[0].addEventListener("reset", () => {
     resetUserForm();

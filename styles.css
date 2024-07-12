@@ -35,6 +35,15 @@ body{
 .form-heading-element{
     flex-grow: 1;
 }
+.button-container{
+    display: flex;
+}
+.button-add{
+    margin-right: 20px;
+}
+#btnResetForm{
+    background-color: rgb(255, 74, 74);
+}
 .container{
     margin-top:40px;
     width: 100%;
